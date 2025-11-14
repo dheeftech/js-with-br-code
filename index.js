@@ -1,25 +1,38 @@
-// const min = 50;
-// const max = 100;
-// let rundomNum = Math.floor(Math.random() * (max - min)) + min;
-// console.log(rundomNum);
-//grabbing variables
+// Dice Roller Application
+// Constants
+const DICE_CONFIG = {
+  min: 1,
+  max: 6,
+  numberOfDice: 3,
+};
 
-const roll = document.getElementById("roll");
-const my_label1 = document.getElementById("my_label1");
-const my_label2 = document.getElementById("my_label2");
-const my_label3 = document.getElementById("my_label3");
-const min = 1;
-const max = 6;
+// DOM Elements
+const rollButton = document.getElementById("roll");
+const diceLabels = [
+  document.getElementById("my_label1"),
+  document.getElementById("my_label2"),
+  document.getElementById("my_label3"),
+];
 
-let randomNum1;
-let randomNum2;
-let randomNum3;
+/**
+ * Generates a random number between min and max (inclusive)
+ * @param {number} min - Minimum value
+ * @param {number} max - Maximum value
+ * @returns {number} Random number
+ */
+const generateRandomNumber = (min, max) => {
+  return Math.floor(Math.random() * max) + min;
+};
 
-roll.addEventListener("click", () => {
-  randomNum1 = Math.floor(Math.random() * max + min);
-  randomNum2 = Math.floor(Math.random() * max + min);
-  randomNum3 = Math.floor(Math.random() * max + min);
-  my_label1.textContent = randomNum1;
-  my_label2.textContent = randomNum2;
-  my_label3.textContent = randomNum3;
-});
+/**
+ * Rolls all dice and updates their display labels
+ */
+const rollDice = () => {
+  diceLabels.forEach((label) => {
+    const randomValue = generateRandomNumber(DICE_CONFIG.min, DICE_CONFIG.max);
+    label.textContent = randomValue;
+  });
+};
+
+// Event Listener
+rollButton.addEventListener("click", rollDice);
